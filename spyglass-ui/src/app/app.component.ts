@@ -15,6 +15,6 @@ export class AppComponent {
   constructor(private userService: UserService) {}
 
   getAllUsers(): void {
-    this.userService.findByEmail('cberg@skillstorm.au').subscribe(data => {console.log(data)});
+    this.userService.findByEmail('cberg@skillstorm.com').subscribe(data => {console.log(data)});
   }
 }
