@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpClientModule, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { observable, Observable } from 'rxjs';
+import { buffer, observable, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from 'src/models/user.model';
+
+// declare const Buffer: Buffer;
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+
+  // buffer = require('buffer/').Buffer;
 
   userURL: string = environment.USER_URI;
 
@@ -16,11 +20,17 @@ export class UserService {
   }
 
   findByEmail(email: string, username: string, password: string): Observable<HttpResponse<any>> {
-    let headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', 'Basic ' + btoa(`${username}:${password}`));
-    console.log(`http://${username}:${password}%40${this.userURL}/${email}`)
-    return this.http.get<any>(`http://${this.userURL}/${email}`, {observe: 'response'});
+    let httpHeaders = new HttpHeaders();//Immutable!
+    httpHeaders = httpHeaders.append('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('Authorization', 'Basic ' + btoa(`${username}:${password}`));
+    // httpHeaders = httpHeaders.append('Authorization', 'Basic Y2JlcmdAc2tpbGxzdG9ybS5jb206Y2Jlcmc=');
+
+    let options = {
+      headers: httpHeaders,
+      observe: 'response'
+    }
+    
+    return this.http.get<any>(`http://${this.userURL}/${email}`, {headers: httpHeaders, observe: 'response'});
   }
 
   findAllUsers(username: string, password: string): Observable<HttpResponse<any>> {
