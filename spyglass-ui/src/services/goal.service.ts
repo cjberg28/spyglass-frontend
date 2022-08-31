@@ -9,33 +9,33 @@ import { Goal } from 'src/models/goal.model';
 })
 export class GoalService {
 
-  goalURL: string = environment.GOAL_URI;
+  goalURL: string = environment.GOAL_URI;// localhost:8080/goals
 
   constructor(private http: HttpClient) { 
 
   }
 
-  findAllGoals(): Observable<HttpResponse<any>> {
-    return this.http.get<any>(this.goalURL, {observe: 'response'});
+  findAllGoals(username: string, password: string): Observable<HttpResponse<any>> {
+    return this.http.get<any>(`http://${username}:${password}%40${this.goalURL}`, {observe: 'response'});
   }
 
-  findByUser(email: string): Observable<HttpResponse<any>> {
-    return this.http.get<any>(`${this.goalURL}/user/${email}`, {observe: 'response'});
+  findByUser(email: string, username: string, password: string): Observable<HttpResponse<any>> {
+    return this.http.get<any>(`http://${username}:${password}%40${this.goalURL}/user/${email}`, {observe: 'response'});
   }
 
-  findById(id: number): Observable<HttpResponse<any>> {
-    return this.http.get<any>(`${this.goalURL}/${id}`, {observe: 'response'});
+  findById(id: number, username: string, password: string): Observable<HttpResponse<any>> {
+    return this.http.get<any>(`http://${username}:${password}%40${this.goalURL}/${id}`, {observe: 'response'});
   }
 
-  createGoal(goal: Goal): Observable<HttpResponse<Goal>> {
-    return this.http.post<Goal>(this.goalURL, goal, {observe: 'response'});
+  createGoal(goal: Goal, username: string, password: string): Observable<HttpResponse<Goal>> {
+    return this.http.post<Goal>(`http://${username}:${password}%40${this.goalURL}`, goal, {observe: 'response'});
   }
 
-  updateGoal(goal: Goal): Observable<HttpResponse<any>> {
-    return this.http.put<Goal>(this.goalURL, goal, {observe: 'response'});
+  updateGoal(goal: Goal, username: string, password: string): Observable<HttpResponse<any>> {
+    return this.http.put<Goal>(`http://${username}:${password}%40${this.goalURL}`, goal, {observe: 'response'});
   }
 
-  deleteGoal(id: number): Observable<HttpResponse<any>> {
-    return this.http.delete<any>(`${this.goalURL}/${id}`, {observe: 'response'});
+  deleteGoal(id: number, username: string, password: string): Observable<HttpResponse<any>> {
+    return this.http.delete<any>(`http://${username}:${password}%40${this.goalURL}/${id}`, {observe: 'response'});
   }
 }
