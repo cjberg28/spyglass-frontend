@@ -1,4 +1,4 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { observable, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -9,33 +9,51 @@ import { Goal } from 'src/models/goal.model';
 })
 export class GoalService {
 
-  goalURL: string = environment.GOAL_URI;// localhost:8080/goals
+  goalURL: string = environment.GOAL_URI;
 
   constructor(private http: HttpClient) { 
 
   }
 
   findAllGoals(username: string, password: string): Observable<HttpResponse<any>> {
-    return this.http.get<any>(`http://${username}:${password}%40${this.goalURL}`, {observe: 'response'});
+    let httpHeaders = new HttpHeaders();//Immutable!
+    httpHeaders = httpHeaders.append('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('Authorization', 'Basic ' + btoa(`${username}:${password}`));
+    return this.http.get<any>(`${this.goalURL}`, {headers: httpHeaders, observe: 'response'});
   }
 
   findByUser(email: string, username: string, password: string): Observable<HttpResponse<any>> {
-    return this.http.get<any>(`http://${username}:${password}%40${this.goalURL}/user/${email}`, {observe: 'response'});
+    let httpHeaders = new HttpHeaders();//Immutable!
+    httpHeaders = httpHeaders.append('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('Authorization', 'Basic ' + btoa(`${username}:${password}`));
+    return this.http.get<any>(`${this.goalURL}/user/${email}`, {headers: httpHeaders, observe: 'response'});
   }
 
   findById(id: number, username: string, password: string): Observable<HttpResponse<any>> {
-    return this.http.get<any>(`http://${username}:${password}%40${this.goalURL}/${id}`, {observe: 'response'});
+    let httpHeaders = new HttpHeaders();//Immutable!
+    httpHeaders = httpHeaders.append('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('Authorization', 'Basic ' + btoa(`${username}:${password}`));
+    return this.http.get<any>(`${this.goalURL}/${id}`, {headers: httpHeaders, observe: 'response'});
   }
 
   createGoal(goal: Goal, username: string, password: string): Observable<HttpResponse<Goal>> {
-    return this.http.post<Goal>(`http://${username}:${password}%40${this.goalURL}`, goal, {observe: 'response'});
+    let httpHeaders = new HttpHeaders();//Immutable!
+    httpHeaders = httpHeaders.append('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('Authorization', 'Basic ' + btoa(`${username}:${password}`));
+    return this.http.post<Goal>(`${this.goalURL}`, goal, {headers: httpHeaders, observe: 'response'});
   }
 
   updateGoal(goal: Goal, username: string, password: string): Observable<HttpResponse<any>> {
-    return this.http.put<Goal>(`http://${username}:${password}%40${this.goalURL}`, goal, {observe: 'response'});
+    let httpHeaders = new HttpHeaders();//Immutable!
+    httpHeaders = httpHeaders.append('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('Authorization', 'Basic ' + btoa(`${username}:${password}`));
+    return this.http.put<Goal>(`${this.goalURL}`, goal, {headers: httpHeaders, observe: 'response'});
   }
 
   deleteGoal(id: number, username: string, password: string): Observable<HttpResponse<any>> {
-    return this.http.delete<any>(`http://${username}:${password}%40${this.goalURL}/${id}`, {observe: 'response'});
+    let httpHeaders = new HttpHeaders();//Immutable!
+    httpHeaders = httpHeaders.append('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('Authorization', 'Basic ' + btoa(`${username}:${password}`));
+    return this.http.delete<any>(`${this.goalURL}/${id}`, {headers: httpHeaders, observe: 'response'});
   }
 }
