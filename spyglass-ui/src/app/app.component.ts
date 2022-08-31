@@ -1,27 +1,18 @@
-import { Component } from '@angular/core';
-import { UserService } from 'src/services/user.service';
-import { HttpClient, HttpClientModule, HttpResponse } from '@angular/common/http';
-import { GoalService } from 'src/services/goal.service';
-import { environment } from 'src/environments/environment';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'spyglass-ui';
 
-  constructor(private userService: UserService, private goalService: GoalService) {}
+  constructor(private router: Router) {}
 
-  getAllUsers(): void {
-    this.userService.findByEmail('cberg@skillstorm.com', environment.TEST_USERNAME, environment.TEST_PASSWORD).subscribe({
-      next: (data) => { console.log(data); },//data is an HttpResponse
-      error: (error) => { console.log(error.error) }//error is an HttpErrorResponse
-    });
-    this.goalService.findByUser('cberg@skillstorm.com', environment.TEST_USERNAME, environment.TEST_PASSWORD).subscribe({
-      next: (data) => { console.log(data); },//data is an HttpResponse
-      error: (error) => { console.log(error.error) }//error is an HttpErrorResponse
-    });
+  ngOnInit() {
+    //Upon launching the application, immediately redirect the user to the login page.
+    this.router.navigate(['/login']);
   }
 }
