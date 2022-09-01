@@ -1,5 +1,22 @@
-<p>LOGIN PAGE</p>
-<div><h1>Welcome to Spyglass! Please sign in.</h1></div>
-
-
-<div><p-button label="Get User Example" (onClick)="getAllUsers()"></p-button></div>
+<div id="login-background-image">
+    <div class="main-container">
+        <div id="spyglass-image"></div>
+        <div class="sub-container">
+            <h1>Welcome to Spyglass! Please sign in.</h1>
+            <!-- May remove the tooltip later on. -->
+            <input type="text" pInputText placeholder="Username" class="input-text" [(ngModel)]="username" (keydown.enter)="login()" pTooltip="Enter a valid email address." tooltipPosition="right" tooltipEvent="focus">
+            <input type="password" pInputText placeholder="Password" class="input-text" [(ngModel)]="password" (keydown.enter)="login()">
+            <div class="sub-sub-container">
+                <p-button label="Login" class="button" (onClick)="login()"></p-button>
+                <p-button label="Create Account" class="button" (onClick)="createAccount('','')"></p-button>
+            </div>
+        </div>
+    
+    </div>
+    <div>
+        <!-- Create account modal goes here -->
+    </div>
+    
+    <!-- Used for dynamic messages -->
+    <p-toast position="top-center"></p-toast>
+</div>
