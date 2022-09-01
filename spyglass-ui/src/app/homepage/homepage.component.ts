@@ -62,4 +62,9 @@ export class HomepageComponent implements OnInit {
     this.userCredsService.setUsername('');
     this.userCredsService.setPassword('');
   }
+
+  //Exists as a workaround to allow rounding in the HTML page.
+  round(num: number): string {
+    return num.toFixed(2);
+  }
 }

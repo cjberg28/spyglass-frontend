@@ -29,5 +29,75 @@
     flex-direction: row;
     flex-wrap: wrap;
     column-gap: 10px;
+    row-gap: 10px;
     margin: 20px;
+    overflow-y: auto;
+    justify-content: flex-start;
+    height: 672px;
+    margin-right: 0px;
+    /* Stretch works when goal-card height is auto */
+    /* align-items: stretch; */
 }
+
+.goal-card {
+    width: 350px;
+    height: 550px;
+}
+
+/* This webkit stuff is for a custom scrollbar */
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  img.ng-star-inserted {
+    width: 100%;
+    height: 270px;
+    /* This resizes the image to fit the dimensions */
+    object-fit: cover;
+  }
+
+  /* This is all trying to get the heights the same, but it doesn't want to work unfortunately. */
+  p-card.p-element {
+    height: 550px;
+  }
+
+  div.p-card-body {
+    height: 275px;
+  }
+
+  div.p-card-content {
+    height: 103px;
+  }
+
+  p-card.p-component {
+    height: 550px;
+  }
+
+  .p-card {
+    height: 550px;
+  }
+
+  p-card {
+    height: 550px;
+  }
+
+  .p-card-extender {
+    /* [class.p-card-extender]="true" */
+    height: 550px;
+  }
