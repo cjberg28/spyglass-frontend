@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   username: string = '';
   password: string = '';
 
-  constructor(private userService: UserService, private goalService: GoalService, private messageService: MessageService, private userCredsService: UserCredentialsService, private router: Router) { }
+  constructor(private userService: UserService, private messageService: MessageService, private userCredsService: UserCredentialsService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit {
     this.password = '';
   }
 
+  //Not implemented yet
   createAccount(username: string, password: string) {
     this.messageService.add({severity: 'info', summary: 'No Content', detail: 'Check back soon!'});
   }

@@ -13,6 +13,8 @@ import {ToastModule} from 'primeng/toast';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomepageComponent } from './homepage/homepage.component';
 import {TooltipModule} from 'primeng/tooltip';
+import {ProgressBarModule} from 'primeng/progressbar';
+import {CardModule} from 'primeng/card';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import {TooltipModule} from 'primeng/tooltip';
     FormsModule,
     ToastModule,
     BrowserAnimationsModule,
-    TooltipModule
+    TooltipModule,
+    ProgressBarModule,
+    CardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

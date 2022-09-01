@@ -1,1 +1,27 @@
-<p>homepage works!</p>
+<div id="homepage-background">
+    <div id="navbar">
+
+
+    </div>
+
+    <div id="goals-progress-bar">
+        <div class="progress-bar"><p-progressBar [value]="totalProgress"></p-progressBar></div>
+        Congratulations! You are currently {{ totalProgress }}% towards completing your goals.
+    </div>
+
+    <div id="all-goal-cards" *ngFor="let goal of this.goals">
+        <p-card header="{{ goal.name }}" subheader="Progress: ${{ goal.currentAmount }}/${{ goal.targetAmount }} ({{ (goal.currentAmount/goal.targetAmount)*100 }}%)">
+            <ng-template pTemplate="header">
+                <img alt="Image could not be displayed." src="{{ goal.imageSrc }}">
+            </ng-template>
+            {{ goal.description }}
+            <ng-template pTemplate="footer">
+                Target Date: {{ goal.targetDate }}
+                <div class="progress-bar"><p-progressBar [value]="(goal.currentAmount/goal.targetAmount)*100 >= 100 ? 100 : (goal.currentAmount/goal.targetAmount)*100 >= 100"></p-progressBar></div>
+            </ng-template>
+        </p-card>
+    </div>
+
+
+
+</div>
