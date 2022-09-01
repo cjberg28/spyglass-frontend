@@ -15,12 +15,14 @@ import { HomepageComponent } from './homepage/homepage.component';
 import {TooltipModule} from 'primeng/tooltip';
 import {ProgressBarModule} from 'primeng/progressbar';
 import {CardModule} from 'primeng/card';
+import { ViewGoalComponent } from './view-goal/view-goal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomepageComponent
+    HomepageComponent,
+    ViewGoalComponent
   ],
   imports: [
     BrowserModule,

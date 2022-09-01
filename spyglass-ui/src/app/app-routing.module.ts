@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { LoginComponent } from './login/login.component';
+import { ViewGoalComponent } from './view-goal/view-goal.component';
 
 const routes: Routes = [
   {// /login -> LoginComponent
@@ -12,6 +12,10 @@ const routes: Routes = [
   {// /home -> HomepageComponent
     path: 'home',
     component: HomepageComponent
+  },
+  {// /view-goal -> ViewGoalComponent
+    path: 'view-goal',
+    component: ViewGoalComponent
   }
 ];
 

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Goal } from 'src/models/goal.model';
 import { User } from 'src/models/user.model';
+import { GoalSharingService } from 'src/services/goal-sharing.service';
 import { GoalService } from 'src/services/goal.service';
 import { UserCredentialsService } from 'src/services/user-credentials.service';
 import { UserService } from 'src/services/user.service';
@@ -25,7 +26,8 @@ export class HomepageComponent implements OnInit {
 
   goals: Goal[] = [];
 
-  constructor(private userService: UserService, private goalService: GoalService, private userCredsService: UserCredentialsService, private messageService: MessageService, private router: Router) { }
+  constructor(private userService: UserService, private goalService: GoalService, private userCredsService: UserCredentialsService, private messageService: MessageService,
+              private goalSharingService: GoalSharingService, private router: Router) { }
 
   ngOnInit(): void {
     //Grab the currentUser, username, and password variables from the service (accessed by the login page)
@@ -66,5 +68,11 @@ export class HomepageComponent implements OnInit {
   //Exists as a workaround to allow rounding in the HTML page.
   round(num: number): string {
     return num.toFixed(2);
+  }
+
+  viewGoal(goal: Goal) {
+    //Pass the selected goal to the GoalSharingService, then navigate to that page.
+    this.goalSharingService.setGoal(goal);
+    this.router.navigate(['/view-goal']);
   }
 }
