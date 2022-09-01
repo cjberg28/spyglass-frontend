@@ -4,6 +4,7 @@ import { UserService } from 'src/services/user.service';
 import { Router } from '@angular/router';
 import { User } from 'src/models/user.model';
 import {MessageService} from 'primeng/api';
+import { UserCredentialsService } from 'src/services/user-credentials.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
   username: string = '';
   password: string = '';
 
-  constructor(private userService: UserService, private goalService: GoalService, private messageService: MessageService, private router: Router) { }
+  constructor(private userService: UserService, private goalService: GoalService, private messageService: MessageService, private userCredsService: UserCredentialsService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -27,9 +28,11 @@ export class LoginComponent implements OnInit {
     this.userService.findByEmail(this.username, this.username, this.password).subscribe({
       next: (data) => {
         this.currentUser = new User(data.body.email, data.body.firstName, data.body.lastName, data.body.dateOfBirth);
-        console.log(this.currentUser);
+        //Send currentUser, username, and password through a service so that the homepage can access it.
+        this.userCredsService.setUser(this.currentUser);
+        this.userCredsService.setUsername(this.username);
+        this.userCredsService.setPassword(this.password);
         this.clearInputFields();
-        //TODO: Send currentUser, username, and password through a service so that the homepage can access it.
         this.router.navigate(['/home']);
       },
       error: (error) => {
