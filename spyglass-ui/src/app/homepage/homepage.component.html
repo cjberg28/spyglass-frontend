@@ -11,7 +11,7 @@
 
     <div id="all-goal-cards">
         <!-- Get this onclick to work. Try looking at Project 3's view listing? -->
-        <div class="goal-card" *ngFor="let goal of this.goals" onclick="viewGoal(goal)">
+        <div class="goal-card" *ngFor="let goal of this.goals" (click)="viewGoal(goal)">
             <p-card header="{{ goal.name }}" subheader="Progress: ${{ round(goal.currentAmount) }}/${{ round(goal.targetAmount) }} ({{ round((goal.currentAmount/goal.targetAmount)*100) }}%)">
                 <ng-template pTemplate="header">
                     <img alt="Image could not be displayed." src="{{ goal.imageSrc }}">
