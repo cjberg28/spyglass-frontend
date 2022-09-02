@@ -97,13 +97,12 @@ export class ViewGoalComponent implements OnInit {
   updateGoal(goal: Goal) {
     this.goalService.updateGoal(goal, this.username, this.password).subscribe({
       next: (data) => {
-        console.log(data);
         if (data.body == false) {//Somehow, the update failed.
           this.messageService.add({severity: 'error', summary: 'Update Failed', detail: 'Please ensure all fields are correct and try again.'});
         } else {
-          this.messageService.add({severity: 'success', summary: 'Update Successful', detail: 'Returning to home page...'});
           this.isEditingGoal = false;
-          setTimeout(() => this.returnToHomepage(), 2000);//Wait 2 seconds for user to see the message, then return to the homepage.
+          this.setGoalData(goal);//Refreshes the chart to show latest updates.
+          this.messageService.add({severity: 'success', summary: 'Update Successful', detail: 'Goal updated successfully.'});
         }
       },
       error: (error) => {
@@ -117,7 +116,7 @@ export class ViewGoalComponent implements OnInit {
   cancel() {
     this.getGoal();//Refresh to original values in case any information was changed in the modal.
     this.isEditingGoal = false;
-    this.ngOnInit();//May be necessary to refresh fields showing on the page back to original values.
+    this.ngOnInit();//Necessary to refresh fields showing on the page back to original values.
   }
 
   returnToHomepage() {
