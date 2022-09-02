@@ -21,6 +21,8 @@ export class ViewGoalComponent implements OnInit {
   username: string = '';
   password: string = '';
 
+  goalData: any;
+
   constructor(private userService: UserService, private goalService: GoalService, private goalSharingService: GoalSharingService, private userCredsService: UserCredentialsService,
               private messageService: MessageService, private router: Router) { }
 
@@ -28,6 +30,7 @@ export class ViewGoalComponent implements OnInit {
     //Grab the currentUser, username, and password variables from the service (accessed by the login page)
     this.getCredentials();
     this.getGoal();
+    this.setGoalData(this.goal);
   }
 
   getCredentials(): void {
@@ -49,5 +52,24 @@ export class ViewGoalComponent implements OnInit {
 
   getGoal(): void {
     this.goal = this.goalSharingService.getGoal();
+  }
+
+  setGoalData(goal: Goal) {
+    this.goalData = {
+      labels: ['Amount Invested', 'Amount Remaining'],
+      datasets: [
+        {
+          data: [this.goal.currentAmount, this.goal.targetAmount - this.goal.currentAmount],
+          backgroundColor: [
+            "#36A2EB",
+            "#808080"
+          ],
+          hoverBackgroundColor: [
+            "#36A2EB",
+            "#808080"
+          ]
+        }
+      ]
+    };
   }
 }
