@@ -3,30 +3,30 @@
         <div id="donut-chart"><p-chart type="doughnut" [data]="goalData"></p-chart></div>
 
         <div id="information-container">
-            <div><strong style="font-size: largest; color: green;">{{ (goal.currentAmount/goal.targetAmount)*100 >= 100 ? "100.00" : round((goal.currentAmount/goal.targetAmount)*100) }}%</strong> Complete</div>
+            <div><strong style="font-size: xxx-large; color: green;">{{ (goal.currentAmount/goal.targetAmount)*100 >= 100 ? "100.00" : round((goal.currentAmount/goal.targetAmount)*100) }}%</strong><span style="font-size: xx-large;"> Complete</span></div>
 
             <div class="input-field">
-                <div><strong>Goal Title</strong></div>
+                <div><strong style="font-size: larger;">Goal Title</strong></div>
                 <div>{{ this.goal.name }}</div>
             </div>
             <div class="input-field">
-                <div><strong>Goal Description</strong></div>
+                <div><strong style="font-size: larger;">Goal Description</strong></div>
                 <div>{{ this.goal.description }}</div>
             </div>
             <div class="input-field">
-                <div><strong>Image</strong></div>
+                <div><strong style="font-size: larger;">Image</strong></div>
                 <img alt="Image could not be displayed." src="{{ this.goal.imageSrc }}" width="200" height="200">
             </div>
             <div class="input-field">
-                <div><strong>Target Date</strong></div>
+                <div><strong style="font-size: larger;">Target Date</strong></div>
                 <div>{{ this.goal.targetDate }}</div>
             </div>
             <div class="input-field">
-                <div><strong>Target Amount</strong></div>
+                <div><strong style="font-size: larger;">Target Amount</strong></div>
                 <div>${{ round(this.goal.targetAmount) }}</div>
             </div>
             <div class="input-field">
-                <div><strong>Current Amount Saved</strong></div>
+                <div><strong style="font-size: larger;">Current Amount Saved</strong></div>
                 <div>${{ round(this.goal.currentAmount) }}</div>
             </div>
 
