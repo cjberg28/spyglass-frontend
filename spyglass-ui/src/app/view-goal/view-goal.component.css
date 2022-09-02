@@ -29,9 +29,20 @@
 #update-container {
     display: flex;
     flex-flow: row wrap;
-    justify-content: center;
+    column-gap: 50px;
+    row-gap: 75px;
+    /* height: 500px; */
 }
 
-.field {
-    margin: 20px;
+.input-field {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    row-gap: 5px;
+}
+
+#button-container {
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
 }

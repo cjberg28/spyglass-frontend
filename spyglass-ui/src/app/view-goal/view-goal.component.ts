@@ -58,22 +58,35 @@ export class ViewGoalComponent implements OnInit {
   }
 
   setGoalData(goal: Goal) {
-    this.goalData = {
-      labels: ['Amount Invested', 'Amount Remaining'],
-      datasets: [
-        {
-          data: [this.goal.currentAmount, this.goal.targetAmount - this.goal.currentAmount],
-          backgroundColor: [
-            "#36A2EB",
-            "#808080"
-          ],
-          hoverBackgroundColor: [
-            "#36A2EB",
-            "#808080"
-          ]
-        }
-      ]
-    };
+    if (this.goal.currentAmount >= this.goal.targetAmount) {
+      this.goalData = {
+        labels: ['Amount Invested'],
+        datasets: [
+          {
+            data: [this.goal.currentAmount],
+            backgroundColor: ["#36A2EB"],
+            hoverBackgroundColor: ["#36A2EB"]
+          }
+        ]
+      };
+    } else {
+      this.goalData = {
+        labels: ['Amount Invested', 'Amount Remaining'],
+        datasets: [
+          {
+            data: [this.goal.currentAmount, this.goal.targetAmount - this.goal.currentAmount],
+            backgroundColor: [
+              "#36A2EB",
+              "#808080"
+            ],
+            hoverBackgroundColor: [
+              "#36A2EB",
+              "#808080"
+            ]
+          }
+        ]
+      };
+    }
   }
 
   //Exists as a workaround to allow rounding in the HTML page.
