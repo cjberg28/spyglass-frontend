@@ -17,6 +17,9 @@ import {ProgressBarModule} from 'primeng/progressbar';
 import {CardModule} from 'primeng/card';
 import { ViewGoalComponent } from './view-goal/view-goal.component';
 import {ChartModule} from 'primeng/chart';
+import {DialogModule} from 'primeng/dialog';
+import {InputNumberModule} from 'primeng/inputnumber';
+import {CalendarModule} from 'primeng/calendar';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,10 @@ import {ChartModule} from 'primeng/chart';
     TooltipModule,
     ProgressBarModule,
     CardModule,
-    ChartModule
+    ChartModule,
+    DialogModule,
+    InputNumberModule,
+    CalendarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

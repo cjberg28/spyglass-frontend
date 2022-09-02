@@ -23,6 +23,8 @@ export class ViewGoalComponent implements OnInit {
 
   goalData: any;
 
+  isEditingGoal: boolean = false;
+
   constructor(private userService: UserService, private goalService: GoalService, private goalSharingService: GoalSharingService, private userCredsService: UserCredentialsService,
               private messageService: MessageService, private router: Router) { }
 
@@ -71,5 +73,45 @@ export class ViewGoalComponent implements OnInit {
         }
       ]
     };
+  }
+
+  //Exists as a workaround to allow rounding in the HTML page.
+  round(num: number): string {
+    return num.toFixed(2);
+  }
+
+  updateGoal(goal: Goal) {
+    this.goalService.updateGoal(goal, this.username, this.password).subscribe({
+      next: (data) => {
+        console.log(data);
+        if (data.body == false) {//Somehow, the update failed.
+          this.messageService.add({severity: 'error', summary: 'Update Failed', detail: 'Please ensure all fields are correct and try again.'});
+        } else {
+          this.isEditingGoal = false;
+          this.messageService.add({severity: 'success', summary: 'Update Successful', detail: 'Returning to main page...'});
+          //TODO: Send data back to GoalSharingService?
+          setTimeout(() => this.returnToHomepage(), 2000);//Wait 2 seconds for user to see the message, then return to the homepage.
+        }
+      },
+      error: (error) => {
+        //Some error has occurred, or the username/password is incorrect somehow.
+        this.messageService.add({severity: 'error', summary: 'Error', detail: 'An error has occurred. Logging out...'});
+        setTimeout(() => this.logout(), 2000);//Wait 2 seconds for user to see the message, then log out.
+      }
+    });
+  }
+
+  cancel() {
+    this.getGoal();//Refresh to original values in case any information was changed in the modal.
+    this.isEditingGoal = false;
+  }
+
+  returnToHomepage() {
+    this.router.navigate(['/home']);
+  }
+
+  openUpdateModal() {
+    this.getGoal();
+    this.isEditingGoal = true;
   }
 }

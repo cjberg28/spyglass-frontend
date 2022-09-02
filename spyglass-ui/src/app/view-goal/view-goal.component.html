@@ -2,8 +2,16 @@
     <div id="container">
         <div id="donut-chart"><p-chart type="doughnut" [data]="goalData"></p-chart></div>
 
-        <div>
-            OTHER ITEMS GO HERE
+        <div id="information-container">
+            <strong style="font-size: largest; color: green;">{{ round((this.goal.currentAmount / this.goal.targetAmount) * 100) }}%</strong> Complete
+
+
+
+
+
+
+            <p-button icon="pi pi-check" (onClick)="openUpdateModal()" label="Update Goal"></p-button>
+            <p-button (onClick)="returnToHomepage()" label="Return Home"></p-button>
         </div>
 
 
@@ -13,4 +21,38 @@
 
 
     </div>
+
+
+    <p-dialog header="Update Goal" [(visible)]="isEditingGoal" [modal]="true" [draggable]="false" [resizable]="false" [style]="{width: '50vw', height: '50vw'}">
+        <div>
+            <div class="field">
+                <label for="goal-name">Goal Title</label>
+                <input pInputText type="text" id="goal-name" [(ngModel)]="this.goal.name">
+            </div>
+            <div class="field">
+                <label for="goal-description">Goal Description</label>
+                <input pInputText type="text" id="goal-description" [(ngModel)]="this.goal.description">
+            </div>
+            <div class="field">
+                <label for="goal-imageSrc">Image URL</label>
+                <input pInputText type="text" id="goal-imageSrc" [(ngModel)]="this.goal.imageSrc">
+            </div>
+            <div class="field">
+                <label for="goal-targetDate">Target Date</label>
+                <p-calendar id="goal-targetDate" [(ngModel)]="this.goal.targetDate" dateFormat="yy-mm-dd"></p-calendar>
+            </div>
+            <div class="field">
+                <label for="goal-targetAmount">Target Amount</label>
+                <p-inputNumber id="goal-targetAmount" [(ngModel)]="this.goal.targetAmount" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
+            </div>
+            <div class="field">
+                <label for="goal-currentAmount">Current Amount Saved</label>
+                <p-inputNumber id="goal-currentAmount" [(ngModel)]="this.goal.currentAmount" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
+            </div>
+        </div>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (onClick)="updateGoal(this.goal)" label="Update"></p-button>
+            <p-button (onClick)="cancel()" label="Cancel"></p-button>
+        </ng-template>
+    </p-dialog>
 </div>
