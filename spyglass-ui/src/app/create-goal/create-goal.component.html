@@ -26,7 +26,9 @@
                 <div><p-inputNumber id="goal-currentAmount" [(ngModel)]="this.goal.currentAmount" mode="currency" currency="USD" locale="en-US"></p-inputNumber></div>
             </div>
         </div>
-        <p-button icon="pi pi-plus" label="Create" (onClick)="createGoal(this.goal)"></p-button>
-        <p-button label="Cancel" (onClick)="returnToHomepage()"></p-button>
+        <div id="button-container">
+            <p-button icon="pi pi-plus" label="Create" (onClick)="createGoal(this.goal)"></p-button>
+            <p-button label="Cancel" (onClick)="returnToHomepage()"></p-button>
+        </div>
     </div>
 </div>

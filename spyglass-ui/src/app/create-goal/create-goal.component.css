@@ -21,9 +21,12 @@
 #create-container {
     display: flex;
     flex-flow: row wrap;
-    column-gap: 50px;
+    column-gap: 200px;
     row-gap: 75px;
-    /* height: 500px; */
+    min-height: 50%;
+    height: auto;
+    margin: 20px;
+    justify-content: flex-start;
 }
 
 .input-field {
@@ -31,4 +34,12 @@
     flex-direction: column;
     justify-content: left;
     row-gap: 5px;
+}
+
+#button-container {
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    justify-content: right;
+    width: 90%;
 }
