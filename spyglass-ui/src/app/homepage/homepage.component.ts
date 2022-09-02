@@ -22,7 +22,7 @@ export class HomepageComponent implements OnInit {
 
   password: string = '';
 
-  totalProgress: number = 54.76;
+  totalProgress: number = 0;
 
   goals: Goal[] = [];
 
