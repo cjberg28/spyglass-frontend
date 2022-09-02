@@ -5,23 +5,22 @@
     </div>
 
     <div id="goals-progress-bar">
-        <div class="progress-bar"><p-progressBar [value]="totalProgress"></p-progressBar></div>
-       <div>Congratulations! You are currently {{ totalProgress }}% towards completing your goals.</div>
-       <div>Ready to start saving towards a new goal? Click the button below to get started!</div>
-       <p-button icon="pi pi-plus" (onClick)="navigateToCreatePage()" label="Create Goal"></p-button>
+        <div class="progress-bar"><p-progressBar [value]="round(totalProgress)"></p-progressBar></div>
+        <div style="font-size: xx-large;">Congratulations! You are currently <strong style="font-size: xxx-large;">{{ round(totalProgress) }}</strong>% towards completing your goals.</div>
+        <div style="font-size: x-large;">Ready to start saving towards a new goal? Click the button below to get started!</div>
+        <div id="button-container"><p-button icon="pi pi-plus" (onClick)="navigateToCreatePage()" label="Create Goal"></p-button></div>
     </div>
 
     <div id="all-goal-cards">
-        <!-- Get this onclick to work. Try looking at Project 3's view listing? -->
         <div class="goal-card" *ngFor="let goal of this.goals" (click)="viewGoal(goal)">
-            <p-card header="{{ goal.name }}" subheader="Progress: ${{ round(goal.currentAmount) }}/${{ round(goal.targetAmount) }} ({{ round((goal.currentAmount/goal.targetAmount)*100) }}%)">
+            <p-card header="{{ goal.name }}" subheader="Progress: ${{ round(goal.currentAmount) }}/${{ round(goal.targetAmount) }} ({{ (goal.currentAmount/goal.targetAmount)*100 >= 100 ? round(100) : round((goal.currentAmount/goal.targetAmount)*100) }}%)">
                 <ng-template pTemplate="header">
                     <img alt="Image could not be displayed." src="{{ goal.imageSrc }}">
                 </ng-template>
                 {{ goal.description }}
                 <ng-template pTemplate="footer">
                     Target Date: {{ goal.targetDate }}
-                    <div class="progress-bar"><p-progressBar [value]="(goal.currentAmount/goal.targetAmount)*100 >= 100 ? 100 : round((goal.currentAmount/goal.targetAmount)*100)"></p-progressBar></div>
+                    <div class="progress-bar"><p-progressBar [value]="(goal.currentAmount/goal.targetAmount)*100 >= 100 ? round(100) : round((goal.currentAmount/goal.targetAmount)*100)"></p-progressBar></div>
                 </ng-template>
             </p-card>
         </div>

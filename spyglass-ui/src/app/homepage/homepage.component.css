@@ -16,6 +16,7 @@
     flex-direction: column;
     align-items: center;
     border-radius: 25px;
+    row-gap: 10px;
 }
 
 .progress-bar {
@@ -72,6 +73,14 @@
     /* This resizes the image to fit the dimensions */
     object-fit: cover;
   }
+
+  #button-container {
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    justify-content: right;
+    width: 90%;
+}
 
   /* This is all trying to get the heights the same, but it doesn't want to work unfortunately. */
   p-card.p-element {

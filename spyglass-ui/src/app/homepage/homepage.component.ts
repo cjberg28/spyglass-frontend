@@ -33,6 +33,7 @@ export class HomepageComponent implements OnInit {
     //Grab the currentUser, username, and password variables from the service (accessed by the login page)
     this.getCredentials();
     this.getGoals(this.currentUser.email, this.username, this.password);
+    // this.calculateProgress();//Placing this here is too fast for the subscribe in getGoals() to run.
   }
 
   getCredentials(): void {
@@ -45,6 +46,7 @@ export class HomepageComponent implements OnInit {
     this.goalService.findByUser(email, username, password).subscribe({
       next: (data) => {
         this.goals = data.body;
+        this.calculateProgress();
       },
       error: (error) => {
         //Some error has occurred, or the username/password is incorrect somehow.
@@ -78,5 +80,21 @@ export class HomepageComponent implements OnInit {
 
   navigateToCreatePage() {
     this.router.navigate(['/new-goal']);
+  }
+
+  calculateProgress() {
+    let currentSum: number = 0;
+    let targetSum: number = 0;
+    for (let goal of this.goals) {
+      if (goal.currentAmount >= goal.targetAmount) {
+        //This ensures that oversaving in one particular goal doesn't change the total percentage on the home page,
+        //as technically you haven't made any additional progress towards your other goals.
+        currentSum += goal.targetAmount;
+      } else {
+        currentSum += goal.currentAmount;
+      }
+      targetSum += goal.targetAmount;
+    }
+    this.totalProgress = (currentSum >= targetSum) ? 100 : (currentSum/targetSum)*100;
   }
 }
