@@ -6,7 +6,9 @@
 
     <div id="goals-progress-bar">
         <div class="progress-bar"><p-progressBar [value]="totalProgress"></p-progressBar></div>
-        Congratulations! You are currently {{ totalProgress }}% towards completing your goals.
+       <div>Congratulations! You are currently {{ totalProgress }}% towards completing your goals.</div>
+       <div>Ready to start saving towards a new goal? Click the button below to get started!</div>
+       <p-button icon="pi pi-plus" (onClick)="navigateToCreatePage()" label="Create Goal"></p-button>
     </div>
 
     <div id="all-goal-cards">

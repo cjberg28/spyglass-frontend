@@ -3,36 +3,27 @@ import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Goal } from 'src/models/goal.model';
 import { User } from 'src/models/user.model';
-import { GoalSharingService } from 'src/services/goal-sharing.service';
 import { GoalService } from 'src/services/goal.service';
 import { UserCredentialsService } from 'src/services/user-credentials.service';
 import { UserService } from 'src/services/user.service';
 
 @Component({
-  selector: 'app-homepage',
-  templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.css'],
+  selector: 'app-create-goal',
+  templateUrl: './create-goal.component.html',
+  styleUrls: ['./create-goal.component.css'],
   providers: [MessageService]
 })
-export class HomepageComponent implements OnInit {
-
-  currentUser: User = new User('','','',new Date());
+export class CreateGoalComponent implements OnInit {
 
   username: string = '';
-
   password: string = '';
+  currentUser: User = new User('','','',new Date());
+  goal: Goal = new Goal(0,'','','',new Date(),0,0,'',this.currentUser);
 
-  totalProgress: number = 54.76;
-
-  goals: Goal[] = [];
-
-  constructor(private userService: UserService, private goalService: GoalService, private userCredsService: UserCredentialsService, private messageService: MessageService,
-              private goalSharingService: GoalSharingService, private router: Router) { }
+  constructor(private userService: UserService, private userCredsService: UserCredentialsService, private goalService: GoalService, private messageService: MessageService, private router: Router) { }
 
   ngOnInit(): void {
-    //Grab the currentUser, username, and password variables from the service (accessed by the login page)
     this.getCredentials();
-    this.getGoals(this.currentUser.email, this.username, this.password);
   }
 
   getCredentials(): void {
@@ -41,10 +32,11 @@ export class HomepageComponent implements OnInit {
     this.password = this.userCredsService.getPassword();
   }
 
-  getGoals(email: string, username: string, password: string): void {
-    this.goalService.findByUser(email, username, password).subscribe({
+  createGoal(goal: Goal) {
+    this.goalService.createGoal(goal, this.username, this.password).subscribe({
       next: (data) => {
-        this.goals = data.body;
+        console.log(data);
+        this.messageService.add({severity: 'success', summary: 'Goal Added', detail: 'Goal successfully added! Returning to home page...'});
       },
       error: (error) => {
         //Some error has occurred, or the username/password is incorrect somehow.
@@ -52,6 +44,10 @@ export class HomepageComponent implements OnInit {
         setTimeout(() => this.logout(), 2000);//Wait 2 seconds for user to see the message, then log out.
       }
     });
+  }
+
+  returnToHomepage() {
+    this.router.navigate(['/home']);
   }
 
   logout(): void {
@@ -65,18 +61,4 @@ export class HomepageComponent implements OnInit {
     this.userCredsService.setPassword('');
   }
 
-  //Exists as a workaround to allow rounding in the HTML page.
-  round(num: number): string {
-    return num.toFixed(2);
-  }
-
-  viewGoal(goal: Goal) {
-    //Pass the selected goal to the GoalSharingService, then navigate to that page.
-    this.goalSharingService.setGoal(goal);
-    this.router.navigate(['/view-goal']);
-  }
-
-  navigateToCreatePage() {
-    this.router.navigate(['/new-goal']);
-  }
 }

@@ -1,0 +1,32 @@
+<div id="page-background">
+    <div id="card">
+        <div id="create-container">
+            <div class="input-field">
+                <div><strong>Goal Title</strong></div>
+                <div><input pInputText type="text" [(ngModel)]="this.goal.name"></div>
+            </div>
+            <div class="input-field">
+                <div><strong>Goal Description</strong></div>
+                <div><input pInputText type="text" id="goal-description" [(ngModel)]="this.goal.description"></div>
+            </div>
+            <div class="input-field">
+                <div><strong>Image URL</strong></div>
+                <div><input pInputText type="text" id="goal-imageSrc" [(ngModel)]="this.goal.imageSrc"></div>
+            </div>
+            <div class="input-field">
+                <div><strong>Target Date</strong></div>
+                <div><p-calendar id="goal-targetDate" [(ngModel)]="this.goal.targetDate" dateFormat="yy-mm-dd"></p-calendar></div>
+            </div>
+            <div class="input-field">
+                <div><strong>Target Amount</strong></div>
+                <div><p-inputNumber id="goal-targetAmount" [(ngModel)]="this.goal.targetAmount" mode="currency" currency="USD" locale="en-US"></p-inputNumber></div>
+            </div>
+            <div class="input-field">
+                <div><strong>Current Amount Saved</strong></div>
+                <div><p-inputNumber id="goal-currentAmount" [(ngModel)]="this.goal.currentAmount" mode="currency" currency="USD" locale="en-US"></p-inputNumber></div>
+            </div>
+        </div>
+        <p-button icon="pi pi-plus" label="Create" (onClick)="createGoal(this.goal)"></p-button>
+        <p-button label="Cancel" (onClick)="returnToHomepage()"></p-button>
+    </div>
+</div>

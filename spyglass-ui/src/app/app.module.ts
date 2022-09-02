@@ -20,13 +20,15 @@ import {ChartModule} from 'primeng/chart';
 import {DialogModule} from 'primeng/dialog';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {CalendarModule} from 'primeng/calendar';
+import { CreateGoalComponent } from './create-goal/create-goal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomepageComponent,
-    ViewGoalComponent
+    ViewGoalComponent,
+    CreateGoalComponent
   ],
   imports: [
     BrowserModule,

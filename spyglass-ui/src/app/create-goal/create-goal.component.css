@@ -1,0 +1,34 @@
+#page-background {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: tan;
+}
+
+#card {
+    /* width: fit-content; */
+    height: 75%;
+    margin: 100px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 25px;
+}
+
+#create-container {
+    display: flex;
+    flex-flow: row wrap;
+    column-gap: 50px;
+    row-gap: 75px;
+    /* height: 500px; */
+}
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    row-gap: 5px;
+}
