@@ -24,6 +24,7 @@ export class ViewGoalComponent implements OnInit {
   goalData: any;
 
   isEditingGoal: boolean = false;
+  isDeletingGoal: boolean = false;
 
   constructor(private userService: UserService, private goalService: GoalService, private goalSharingService: GoalSharingService, private userCredsService: UserCredentialsService,
               private messageService: MessageService, private router: Router) { }
@@ -87,9 +88,8 @@ export class ViewGoalComponent implements OnInit {
         if (data.body == false) {//Somehow, the update failed.
           this.messageService.add({severity: 'error', summary: 'Update Failed', detail: 'Please ensure all fields are correct and try again.'});
         } else {
+          this.messageService.add({severity: 'success', summary: 'Update Successful', detail: 'Returning to home page...'});
           this.isEditingGoal = false;
-          this.messageService.add({severity: 'success', summary: 'Update Successful', detail: 'Returning to main page...'});
-          //TODO: Send data back to GoalSharingService?
           setTimeout(() => this.returnToHomepage(), 2000);//Wait 2 seconds for user to see the message, then return to the homepage.
         }
       },
@@ -113,5 +113,29 @@ export class ViewGoalComponent implements OnInit {
   openUpdateModal() {
     this.getGoal();
     this.isEditingGoal = true;
+  }
+
+  openDeleteModal() {
+    this.isDeletingGoal = true;
+  }
+
+  deleteGoal(id: number) {
+    this.goalService.deleteGoal(id, this.username, this.password).subscribe({
+      next: (data) => {
+        console.log(data);
+        if (data.body == false) {//Somehow, the delete failed.
+          this.messageService.add({severity: 'error', summary: 'Delete Failed', detail: 'Please try again.'});
+        } else {
+          this.messageService.add({severity: 'success', summary: 'Delete Successful', detail: 'Returning to home page...'});
+          this.isDeletingGoal = false;
+          setTimeout(() => this.returnToHomepage(), 2000);//Wait 2 seconds for user to see the message, then return to the homepage.
+        }
+      },
+      error: (error) => {
+        //Some error has occurred, or the username/password is incorrect somehow.
+        this.messageService.add({severity: 'error', summary: 'Error', detail: 'An error has occurred. Logging out...'});
+        setTimeout(() => this.logout(), 2000);//Wait 2 seconds for user to see the message, then log out.
+      }
+    });
   }
 }

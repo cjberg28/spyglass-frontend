@@ -25,3 +25,13 @@
     flex-direction: column;
     justify-content: center;
 }
+
+#update-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.field {
+    margin: 20px;
+}

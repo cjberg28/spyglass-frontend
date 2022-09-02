@@ -11,6 +11,7 @@
 
 
             <p-button icon="pi pi-check" (onClick)="openUpdateModal()" label="Update Goal"></p-button>
+            <p-button (onClick)="openDeleteModal()" label="Delete Goal"></p-button>
             <p-button (onClick)="returnToHomepage()" label="Return Home"></p-button>
         </div>
 
@@ -24,7 +25,7 @@
 
 
     <p-dialog header="Update Goal" [(visible)]="isEditingGoal" [modal]="true" [draggable]="false" [resizable]="false" [style]="{width: '50vw', height: '50vw'}">
-        <div>
+        <div id="update-container">
             <div class="field">
                 <label for="goal-name">Goal Title</label>
                 <input pInputText type="text" id="goal-name" [(ngModel)]="this.goal.name">
@@ -54,5 +55,10 @@
             <p-button icon="pi pi-check" (onClick)="updateGoal(this.goal)" label="Update"></p-button>
             <p-button (onClick)="cancel()" label="Cancel"></p-button>
         </ng-template>
+    </p-dialog>
+    <p-dialog header="Delete Goal" [(visible)]="isDeletingGoal" [modal]="true" [draggable]="false" [resizable]="false">
+        Are you sure you want to delete this goal? This cannot be undone.
+        <p-button (onClick)="deleteGoal(this.goal.id)" label="Delete"></p-button>
+        <p-button (onClick)="this.isDeletingGoal = false;" label="Cancel"></p-button>
     </p-dialog>
 </div>
