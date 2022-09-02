@@ -33,10 +33,13 @@ export class CreateGoalComponent implements OnInit {
   }
 
   createGoal(goal: Goal) {
+    //Must set user and userId fields for the POST request.
+    goal.user = this.currentUser;
+    goal.userId = this.currentUser.email;
     this.goalService.createGoal(goal, this.username, this.password).subscribe({
       next: (data) => {
-        console.log(data);
         this.messageService.add({severity: 'success', summary: 'Goal Added', detail: 'Goal successfully added! Returning to home page...'});
+        this.returnToHomepage();
       },
       error: (error) => {
         //Some error has occurred, or the username/password is incorrect somehow.
