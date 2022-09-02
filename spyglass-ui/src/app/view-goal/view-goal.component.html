@@ -3,9 +3,32 @@
         <div id="donut-chart"><p-chart type="doughnut" [data]="goalData"></p-chart></div>
 
         <div id="information-container">
-            <strong style="font-size: largest; color: green;">{{ (goal.currentAmount/goal.targetAmount)*100 >= 100 ? "100.00" : round((goal.currentAmount/goal.targetAmount)*100) }}%</strong> Complete
+            <div><strong style="font-size: largest; color: green;">{{ (goal.currentAmount/goal.targetAmount)*100 >= 100 ? "100.00" : round((goal.currentAmount/goal.targetAmount)*100) }}%</strong> Complete</div>
 
-
+            <div class="input-field">
+                <div><strong>Goal Title</strong></div>
+                <div>{{ this.goal.name }}</div>
+            </div>
+            <div class="input-field">
+                <div><strong>Goal Description</strong></div>
+                <div>{{ this.goal.description }}</div>
+            </div>
+            <div class="input-field">
+                <div><strong>Image</strong></div>
+                <img alt="Image could not be displayed." src="{{ this.goal.imageSrc }}" width="200" height="200">
+            </div>
+            <div class="input-field">
+                <div><strong>Target Date</strong></div>
+                <div>{{ this.goal.targetDate }}</div>
+            </div>
+            <div class="input-field">
+                <div><strong>Target Amount</strong></div>
+                <div>${{ round(this.goal.targetAmount) }}</div>
+            </div>
+            <div class="input-field">
+                <div><strong>Current Amount Saved</strong></div>
+                <div>${{ round(this.goal.currentAmount) }}</div>
+            </div>
 
 
             <div id="button-container">
@@ -14,13 +37,6 @@
                 <p-button (onClick)="returnToHomepage()" label="Return Home"></p-button>
             </div>
         </div>
-
-
-
-
-
-
-
     </div>
 
 

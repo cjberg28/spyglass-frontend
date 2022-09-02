@@ -117,6 +117,7 @@ export class ViewGoalComponent implements OnInit {
   cancel() {
     this.getGoal();//Refresh to original values in case any information was changed in the modal.
     this.isEditingGoal = false;
+    this.ngOnInit();//May be necessary to refresh fields showing on the page back to original values.
   }
 
   returnToHomepage() {
