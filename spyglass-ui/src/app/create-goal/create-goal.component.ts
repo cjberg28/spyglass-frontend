@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
@@ -33,20 +34,41 @@ export class CreateGoalComponent implements OnInit {
   }
 
   createGoal(goal: Goal) {
-    //Must set user and userId fields for the POST request.
-    goal.user = this.currentUser;
-    goal.userId = this.currentUser.email;
-    this.goalService.createGoal(goal, this.username, this.password).subscribe({
-      next: (data) => {
-        this.messageService.add({key: 'rootToast', severity: 'success', summary: 'Goal Added', detail: 'Goal successfully added! Returning to home page...'});
-        setTimeout(() => this.returnToHomepage(), 2000);
-      },
-      error: (error) => {
-        //Some error has occurred, or the username/password is incorrect somehow.
-        this.messageService.add({key: 'rootToast', severity: 'error', summary: 'Error', detail: 'An error has occurred. Logging out...'});
-        setTimeout(() => this.logout(), 2000);//Wait 2 seconds for user to see the message, then log out.
-      }
-    });
+    //Validate the input first.
+    let validInput: boolean = true;
+    if (this.goal.name.trim() === '') {
+      validInput = false;
+      this.messageService.add({key: 'rootToast', severity: 'error', summary: 'Title Invalid', detail: 'Goal title cannot be blank or empty.'});
+    }
+    if (this.goal.description.length > 255) {
+      validInput = false;
+      this.messageService.add({key: 'rootToast', severity: 'error', summary: 'Description Invalid', detail: 'Description must be 255 characters or less.'});
+    }
+    if (this.goal.targetDate <= new Date()) {
+      validInput = false;
+      this.messageService.add({key: 'rootToast', severity: 'error', summary: 'Target Date Invalid', detail: 'Target date must be after today.'});
+    }
+    if (this.goal.targetAmount == 0) {
+      validInput = false;
+      this.messageService.add({key: 'rootToast', severity: 'error', summary: 'Target Amount Invalid', detail: 'Target amount cannot be zero.'});
+    }
+
+    if (validInput) {
+      //Must set user and userId fields for the POST request.
+      goal.user = this.currentUser;
+      goal.userId = this.currentUser.email;
+      this.goalService.createGoal(goal, this.username, this.password).subscribe({
+        next: (data) => {
+          this.messageService.add({key: 'rootToast', severity: 'success', summary: 'Goal Added', detail: 'Goal successfully added! Returning to home page...'});
+          setTimeout(() => this.returnToHomepage(), 2000);
+        },
+        error: (error) => {
+          //Some error has occurred, or the username/password is incorrect somehow.
+          this.messageService.add({key: 'rootToast', severity: 'error', summary: 'Error', detail: 'An error has occurred. Logging out...'});
+          setTimeout(() => this.logout(), 2000);//Wait 2 seconds for user to see the message, then log out.
+        }
+      });
+    }
   }
 
   returnToHomepage() {
