@@ -120,7 +120,7 @@ describe('HomepageComponent', () => {
   });
 
   //Function calls that need to be tested are contained within a subscribe() to an observable.
-  //Figuring out how to wait for a subscribe to finish before continuing is complicated.
+  //Figuring out how to wait for a subscribe to finish before testing the expectation is complicated.
   //I am yet to figure it out, hence these tests are commented out.
   // it ('should get all goals when getGoals() is called', () => {
   //   spyOn(goalService, 'findByUser').and.callThrough();

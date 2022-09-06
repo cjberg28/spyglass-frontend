@@ -36,21 +36,25 @@ export class CreateGoalComponent implements OnInit {
   createGoal(goal: Goal) {
     //Validate the input first.
     let validInput: boolean = true;
-    if (this.goal.name.trim() === '') {
+    if (goal.name.trim() === '') {
       validInput = false;
       this.messageService.add({key: 'rootToast', severity: 'error', summary: 'Title Invalid', detail: 'Goal title cannot be blank or empty.'});
     }
-    if (this.goal.description.length > 255) {
+    if (goal.description.length > 255) {
       validInput = false;
       this.messageService.add({key: 'rootToast', severity: 'error', summary: 'Description Invalid', detail: 'Description must be 255 characters or less.'});
     }
-    if (this.goal.targetDate <= new Date()) {
+    if (goal.targetDate <= new Date()) {
       validInput = false;
       this.messageService.add({key: 'rootToast', severity: 'error', summary: 'Target Date Invalid', detail: 'Target date must be after today.'});
     }
-    if (this.goal.targetAmount == 0) {
+    if (goal.targetAmount <= 0) {
       validInput = false;
-      this.messageService.add({key: 'rootToast', severity: 'error', summary: 'Target Amount Invalid', detail: 'Target amount cannot be zero.'});
+      this.messageService.add({key: 'rootToast', severity: 'error', summary: 'Target Amount Invalid', detail: 'Target amount cannot be zero or negative.'});
+    }
+    if (goal.currentAmount < 0) {
+      validInput = false;
+      this.messageService.add({key: 'rootToast', severity: 'error', summary: 'Current Amount Invalid', detail: 'Current amount cannot be negative.'});
     }
 
     if (validInput) {
