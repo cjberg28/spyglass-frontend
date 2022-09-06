@@ -39,7 +39,7 @@ export class CreateGoalComponent implements OnInit {
     this.goalService.createGoal(goal, this.username, this.password).subscribe({
       next: (data) => {
         this.messageService.add({key: 'rootToast', severity: 'success', summary: 'Goal Added', detail: 'Goal successfully added! Returning to home page...'});
-        this.returnToHomepage();
+        setTimeout(() => this.returnToHomepage(), 2000);
       },
       error: (error) => {
         //Some error has occurred, or the username/password is incorrect somehow.
