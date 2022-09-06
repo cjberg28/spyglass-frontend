@@ -5,7 +5,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { LoginComponent } from './login/login.component';
 import { ViewGoalComponent } from './view-goal/view-goal.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {// /login -> LoginComponent
     path: 'login',
     component: LoginComponent
