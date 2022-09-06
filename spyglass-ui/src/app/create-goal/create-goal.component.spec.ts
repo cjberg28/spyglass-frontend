@@ -134,12 +134,12 @@ describe('CreateGoalComponent', () => {
   //I am yet to figure it out, hence this test is commented out.
   // it('should create a goal when fields are valid', () => {
   //   let goalService = TestBed.inject(GoalService);
+  //   spyOn(goalService, 'createGoal');
   //   component.goal.name = 'Test Name';
   //   component.goal.description = 'Test Desc';
   //   component.goal.targetDate = new Date('2032/01/01');
   //   component.goal.targetAmount = 100;
   //   component.createGoal(component.goal);
-  //   spyOn(goalService, 'createGoal');
-  //   expect(goalService.createGoal).toHaveBeenCalled();
+  //   // expect(goalService.createGoal).toHaveBeenCalled();
   // });
 });
