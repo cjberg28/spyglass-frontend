@@ -21,6 +21,7 @@ import {DialogModule} from 'primeng/dialog';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {CalendarModule} from 'primeng/calendar';
 import { CreateGoalComponent } from './create-goal/create-goal.component';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,7 @@ import { CreateGoalComponent } from './create-goal/create-goal.component';
     InputNumberModule,
     CalendarModule
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

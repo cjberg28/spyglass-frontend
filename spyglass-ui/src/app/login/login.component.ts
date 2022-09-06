@@ -10,7 +10,7 @@ import { UserCredentialsService } from 'src/services/user-credentials.service';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [MessageService]
+  providers: []
 })
 export class LoginComponent implements OnInit {
 
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
       },
       error: (error) => {
         this.clearInputFields();
-        this.messageService.add({severity: 'error', summary: 'Login Failed', detail: 'Invalid credentials. Please try again.'});
+        this.messageService.add({key: 'rootToast', severity: 'error', summary: 'Login Failed', detail: 'Invalid credentials. Please try again.'});
       }
     });
   }
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
 
   //Not implemented yet
   createAccount(username: string, password: string) {
-    this.messageService.add({severity: 'info', summary: 'No Content', detail: 'Check back soon!'});
+    this.messageService.add({key: 'rootToast', severity: 'info', summary: 'No Content', detail: 'Check back soon!'});
   }
 
 }

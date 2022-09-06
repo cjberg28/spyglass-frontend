@@ -11,7 +11,7 @@ import { UserService } from 'src/services/user.service';
   selector: 'app-create-goal',
   templateUrl: './create-goal.component.html',
   styleUrls: ['./create-goal.component.css'],
-  providers: [MessageService]
+  providers: []
 })
 export class CreateGoalComponent implements OnInit {
 
@@ -38,12 +38,12 @@ export class CreateGoalComponent implements OnInit {
     goal.userId = this.currentUser.email;
     this.goalService.createGoal(goal, this.username, this.password).subscribe({
       next: (data) => {
-        this.messageService.add({severity: 'success', summary: 'Goal Added', detail: 'Goal successfully added! Returning to home page...'});
+        this.messageService.add({key: 'rootToast', severity: 'success', summary: 'Goal Added', detail: 'Goal successfully added! Returning to home page...'});
         this.returnToHomepage();
       },
       error: (error) => {
         //Some error has occurred, or the username/password is incorrect somehow.
-        this.messageService.add({severity: 'error', summary: 'Error', detail: 'An error has occurred. Logging out...'});
+        this.messageService.add({key: 'rootToast', severity: 'error', summary: 'Error', detail: 'An error has occurred. Logging out...'});
         setTimeout(() => this.logout(), 2000);//Wait 2 seconds for user to see the message, then log out.
       }
     });

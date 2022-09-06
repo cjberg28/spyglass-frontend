@@ -12,7 +12,7 @@ import { UserService } from 'src/services/user.service';
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.css'],
-  providers: [MessageService]
+  providers: []
 })
 export class HomepageComponent implements OnInit {
 
@@ -50,7 +50,7 @@ export class HomepageComponent implements OnInit {
       },
       error: (error) => {
         //Some error has occurred, or the username/password is incorrect somehow.
-        this.messageService.add({severity: 'error', summary: 'Error', detail: 'An error has occurred. Logging out...'});
+        this.messageService.add({key: 'rootToast', severity: 'error', summary: 'Error', detail: 'An error has occurred. Logging out...'});
         setTimeout(() => this.logout(), 2000);//Wait 2 seconds for user to see the message, then log out.
       }
     });

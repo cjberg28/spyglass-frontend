@@ -12,7 +12,7 @@ import { UserService } from 'src/services/user.service';
   selector: 'app-view-goal',
   templateUrl: './view-goal.component.html',
   styleUrls: ['./view-goal.component.css'],
-  providers: [MessageService]
+  providers: []
 })
 export class ViewGoalComponent implements OnInit {
 
@@ -98,16 +98,16 @@ export class ViewGoalComponent implements OnInit {
     this.goalService.updateGoal(goal, this.username, this.password).subscribe({
       next: (data) => {
         if (data.body == false) {//Somehow, the update failed.
-          this.messageService.add({severity: 'error', summary: 'Update Failed', detail: 'Please ensure all fields are correct and try again.'});
+          this.messageService.add({key: 'rootToast', severity: 'error', summary: 'Update Failed', detail: 'Please ensure all fields are correct and try again.'});
         } else {
           this.isEditingGoal = false;
           this.setGoalData(goal);//Refreshes the chart to show latest updates.
-          this.messageService.add({severity: 'success', summary: 'Update Successful', detail: 'Goal updated successfully.'});
+          this.messageService.add({key: 'rootToast', severity: 'success', summary: 'Update Successful', detail: 'Goal updated successfully.'});
         }
       },
       error: (error) => {
         //Some error has occurred, or the username/password is incorrect somehow.
-        this.messageService.add({severity: 'error', summary: 'Error', detail: 'An error has occurred. Logging out...'});
+        this.messageService.add({key: 'rootToast', severity: 'error', summary: 'Error', detail: 'An error has occurred. Logging out...'});
         setTimeout(() => this.logout(), 2000);//Wait 2 seconds for user to see the message, then log out.
       }
     });
@@ -137,16 +137,16 @@ export class ViewGoalComponent implements OnInit {
       next: (data) => {
         console.log(data);
         if (data.body == false) {//Somehow, the delete failed.
-          this.messageService.add({severity: 'error', summary: 'Delete Failed', detail: 'Please try again.'});
+          this.messageService.add({key: 'rootToast', severity: 'error', summary: 'Delete Failed', detail: 'Please try again.'});
         } else {
-          this.messageService.add({severity: 'success', summary: 'Delete Successful', detail: 'Returning to home page...'});
+          this.messageService.add({key: 'rootToast', severity: 'success', summary: 'Delete Successful', detail: 'Returning to home page...'});
           this.isDeletingGoal = false;
           setTimeout(() => this.returnToHomepage(), 2000);//Wait 2 seconds for user to see the message, then return to the homepage.
         }
       },
       error: (error) => {
         //Some error has occurred, or the username/password is incorrect somehow.
-        this.messageService.add({severity: 'error', summary: 'Error', detail: 'An error has occurred. Logging out...'});
+        this.messageService.add({key: 'rootToast', severity: 'error', summary: 'Error', detail: 'An error has occurred. Logging out...'});
         setTimeout(() => this.logout(), 2000);//Wait 2 seconds for user to see the message, then log out.
       }
     });
