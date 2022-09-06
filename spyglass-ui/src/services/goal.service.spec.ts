@@ -62,5 +62,5 @@ describe('GoalService', () => {
     let result = service.deleteGoal(1,environment.TEST_USERNAME,environment.TEST_PASSWORD);
     expect(http.delete).toHaveBeenCalled();
     expect(result).toBeTruthy();
-  })
+  });
 });
