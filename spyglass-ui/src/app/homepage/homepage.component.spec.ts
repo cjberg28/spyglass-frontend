@@ -1,4 +1,8 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MessageService } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 import { HomepageComponent } from './homepage.component';
 
@@ -8,7 +12,13 @@ describe('HomepageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HomepageComponent ]
+      declarations: [ HomepageComponent ],
+      imports: [
+        HttpClientModule,
+        ProgressBarModule,
+        ButtonModule
+      ],
+      providers: [MessageService]
     })
     .compileComponents();
 
