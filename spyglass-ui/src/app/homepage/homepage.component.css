@@ -86,8 +86,9 @@ img.ng-star-inserted {
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 50px;
+  width: fit-content;
   height: 50px;
+  margin-right: 5px;
 }
 
 /* This is all trying to get the heights the same, but it doesn't want to work unfortunately. */
