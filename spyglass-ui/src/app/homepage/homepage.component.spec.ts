@@ -126,7 +126,7 @@ describe('HomepageComponent', () => {
     spyOn(goalService, 'findByUser').and.callThrough();
     spyOn(component, 'calculateProgress').and.callThrough();
     component.getGoals('jchan@aol.com',environment.TEST_USERNAME,environment.TEST_PASSWORD);
-    // expect(goalService.findByUser).toHaveBeenCalled();
+    expect(goalService.findByUser).toHaveBeenCalled();
     // expect(component.calculateProgress).toHaveBeenCalled();
     // expect(component.goals.length).toBeGreaterThan(0);
   });
