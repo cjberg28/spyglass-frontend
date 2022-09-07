@@ -3,7 +3,7 @@
         <div id="donut-chart"><p-chart type="doughnut" [data]="goalData"></p-chart></div>
 
         <div id="information-container">
-            <div><strong style="font-size: xxx-large; color: green;">{{ (goal.currentAmount/goal.targetAmount)*100 >= 100 ? "100.00" : round((goal.currentAmount/goal.targetAmount)*100) }}%</strong><span style="font-size: xx-large;"> Complete</span></div>
+            <div><strong style="font-size: xxx-large; color: rgb(0, 175, 0);">{{ (goal.currentAmount/goal.targetAmount)*100 >= 100 ? "100.00" : round((goal.currentAmount/goal.targetAmount)*100) }}%</strong><span style="font-size: xx-large;"> Complete</span></div>
 
             <div class="input-field">
                 <div><strong style="font-size: larger;">Goal Title</strong></div>
