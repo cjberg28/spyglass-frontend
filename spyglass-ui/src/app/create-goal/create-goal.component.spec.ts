@@ -12,12 +12,15 @@ import {Location} from '@angular/common';
 
 import { CreateGoalComponent } from './create-goal.component';
 import { GoalService } from 'src/services/goal.service';
+import { User } from 'src/models/user.model';
+import { environment } from 'src/environments/environment';
 
 describe('CreateGoalComponent', () => {
   let component: CreateGoalComponent;
   let fixture: ComponentFixture<CreateGoalComponent>;
   let router: Router;
   let location: Location;
+  // let goalService: GoalService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -30,7 +33,7 @@ describe('CreateGoalComponent', () => {
         FormsModule,
         RouterTestingModule.withRoutes(routes)
       ],
-      providers: [MessageService, Location]
+      providers: [MessageService, Location]//, {provide: GoalService, useValue: goalService}]
     })
     .compileComponents();
 
@@ -131,15 +134,38 @@ describe('CreateGoalComponent', () => {
 
   //Function calls that need to be tested are contained within a subscribe() to an observable.
   //Figuring out how to wait for a subscribe to finish before testing the expectation is complicated.
-  //I am yet to figure it out, hence this test is commented out.
-  // it('should create a goal when fields are valid', () => {
-  //   let goalService = TestBed.inject(GoalService);
-  //   spyOn(goalService, 'createGoal');
-  //   component.goal.name = 'Test Name';
-  //   component.goal.description = 'Test Desc';
-  //   component.goal.targetDate = new Date('2032/01/01');
-  //   component.goal.targetAmount = 100;
-  //   component.createGoal(component.goal);
-  //   // expect(goalService.createGoal).toHaveBeenCalled();
-  // });
+  //I am yet to figure it out, hence these expectations are commented out.
+  it('should create a goal when fields are valid', () => {
+    let goalService = TestBed.inject(GoalService);
+    spyOn(goalService, 'createGoal').and.callThrough();
+    spyOn(component, 'returnToHomepage');
+    component.goal.name = 'Test Name';
+    component.goal.description = 'Test Desc';
+    component.goal.targetDate = new Date('2032/01/01');
+    component.goal.targetAmount = 100;
+    component.goal.currentAmount = 0;
+    component.goal.imageSrc = 'example.com/image';
+    component.currentUser = new User('cberg@skillstorm.com','Cameron','Berg',new Date('2000/01/28'));
+    component.username = environment.TEST_USERNAME;
+    component.password = environment.TEST_PASSWORD;
+    component.createGoal(component.goal);
+    // expect(goalService.createGoal).toHaveBeenCalled();
+    // expect(component.returnToHomepage).toHaveBeenCalled();
+  });
+
+  it('should error when creating a goal with valid fields but invalid credentials (or some other error)', () => {
+    let goalService = TestBed.inject(GoalService);
+    spyOn(goalService, 'createGoal').and.callThrough();
+    // spyOn(component, 'logout');
+    component.goal.name = 'Test Name';
+    component.goal.description = 'Test Desc';
+    component.goal.targetDate = new Date('2032/01/01');
+    component.goal.targetAmount = 100;
+    component.goal.currentAmount = 0;
+    component.goal.imageSrc = 'example.com/image';
+    component.currentUser = new User('cberg@skillstorm.com','Cameron','Berg',new Date('2000/01/28'));
+    component.createGoal(component.goal);
+    // expect(goalService.createGoal).toHaveBeenCalled();
+    // expect(component.logout).toHaveBeenCalled();
+  });
 });
