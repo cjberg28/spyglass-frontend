@@ -16,6 +16,14 @@ import { UserService } from 'src/services/user.service';
 })
 export class HomepageComponent implements OnInit {
 
+  pCardStyle = {
+    'padding': '1.25rem',
+    'min-height': '276px',
+    'display': 'flex',
+    'flex-direction': 'column',
+    'justify-content': 'space-between'
+  };
+
   currentUser: User = new User('','','',new Date());
 
   username: string = '';

@@ -42,7 +42,7 @@
 
 .goal-card {
   width: 350px;
-  height: 550px;
+  height: 600px;
   cursor: pointer;
 }
 
@@ -91,32 +91,14 @@ img.ng-star-inserted {
   margin-right: 5px;
 }
 
-/* This is all trying to get the heights the same, but it doesn't want to work unfortunately. */
-p-card.p-element {
-  height: 550px;
+:host ::ng-deep .p-card .p-card-body {
+  padding: 1.25rem;
+  height: 326px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-div.p-card-body {
-  height: 275px;
-}
-
-div.p-card-content {
-  height: 103px;
-}
-
-p-card.p-component {
-  height: 550px;
-}
-
-.p-card {
-  height: 550px;
-}
-
-p-card {
-  height: 550px;
-}
-
-.p-card-extender {
-  /* [class.p-card-extender]="true" */
-  height: 550px;
+:host ::ng-deep .p-card {
+  height: 600px;
 }
