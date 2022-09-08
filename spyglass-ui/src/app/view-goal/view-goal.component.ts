@@ -135,7 +135,6 @@ export class ViewGoalComponent implements OnInit {
   deleteGoal(id: number) {
     this.goalService.deleteGoal(id, this.username, this.password).subscribe({
       next: (data) => {
-        console.log(data);
         if (data.body == false) {//Somehow, the delete failed.
           this.messageService.add({key: 'rootToast', severity: 'error', summary: 'Delete Failed', detail: 'Please try again.'});
         } else {
